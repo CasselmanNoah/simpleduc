@@ -37,7 +37,7 @@ class BaseController extends AbstractController
                     'nom'=> $inscription->getNom(),
                     'prenom'=> $inscription->getPrenom(),
                 ]);
-                $contact->setDateEnvoi(new \Datetime());
+                $inscription->setDateEnvoi(new \Datetime());
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($inscription);
                 $em->flush();

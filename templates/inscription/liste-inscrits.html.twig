@@ -19,12 +19,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for inscrit in inscription %}
+                        {% for inscrit in inscription |sort((a, b) => b.dateEnvoi <=> a.dateEnvoi)%}
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
                             <td>{{ inscrit.nom | capitalize }}</td>
                             <td>{{ inscrit.prenom | capitalize }}</td>
                             <td>{{ inscrit.email | lower }}</td>
-
+                            <td>{{ inscrit.dateEnvoi | date("d-m-Y à H:i:s") }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
