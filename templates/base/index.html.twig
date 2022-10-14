@@ -3,10 +3,47 @@
 {% block title %}{{parent()}}Accueil{% endblock %}
 
 {% block body %}
-<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> PROJET SIMPLEEDUC</h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<h2 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> Bienvenue sur le site !</h2>
-
+<div class="p-5 text-center bg-image rounded-3" style="
+    background-image: url('https://codeandhack.b-cdn.net/wp-content/uploads/2020/04/Best-JavaScript-Frameworks-768x427.jpg');
+    height: 300px;
+  ">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+                <h1 class="mb-3">Projet SIMPLEEDUC</h1>
+                <h4 class="mb-3">Bienvenue sur notre site !</h4>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Présentation du projet</h3>
+            <p>Le site proposé est un projet de deuxième année de BTS SIO </p>
+        </div>
+        <div class="col-sm-4">
+            <h3>But du projet</h3>
+            <p></p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Résultat prévu et attendu</h3>
+            <p>Voici les différents résultat attendu et présents:</p>
+            <ul>
+                <li>
+                    test
+                </li>
+                <li>
+                    test2
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

@@ -51,13 +51,7 @@ class BaseController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-    #[Route('/login', name: 'login')]
-    public function login(): Response
-    {
-        return $this->render('security/login.html.twig', [
-            
-        ]);
-    }
+  
    
    
     #[Route('/apropos', name: 'apropos')] // étape 1

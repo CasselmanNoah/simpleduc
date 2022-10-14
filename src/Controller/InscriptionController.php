@@ -9,7 +9,7 @@ use App\Entity\Inscription;
 
 class InscriptionController extends AbstractController
 {
-    #[Route('/liste-inscrits', name: 'liste-inscrits')]
+    #[Route('/private-liste-inscrits', name: 'liste-inscrits')]
     public function listeContacts(): Response
     {
         $repoInscription = $this->getDoctrine()->getRepository(Inscription::class);

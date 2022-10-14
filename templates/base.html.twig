@@ -7,8 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block stylesheets %}
     <!-- Bootstrap CSS -->
-    <link href="https://bootswatch.com/5/sketchy/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://bootswatch.com/5/flatly/bootstrap.min.css" rel="stylesheet">
     {% endblock %}
+
     <title>{% block title %}Projet - {% endblock %}</title>
 </head>
 
@@ -29,22 +31,36 @@
                     </li>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('login')}}">Login
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('inscription')}}">S'inscrire
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('liste-inscrits')}}">Liste d'inscrits
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('apropos')}}">A propos
                         </a>
                     </li>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{path('app_login')}}">Se connecter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{path('app_register')}}">S'inscrire
+                        </a>
+                    </li>
+                    {% else %}
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD')%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('liste-inscrits')}}">Liste d'inscrits
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{path('app_logout')}}"> {{app.user.email}}
+                            <i class="bi bi-x-circle-fill text-white"></i>
+                        </a>
+                    </li>
+
+                    {% endif %}
+
+
                 </ul>
             </div>
         </div>
