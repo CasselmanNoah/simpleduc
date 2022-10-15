@@ -59,7 +59,13 @@ class BaseController extends AbstractController
             
         ]);
     }
-   
+    #[Route('/avis', name: 'avis')] // étape 1
+    public function avis(): Response // étape 2
+    {
+        return $this->render('base/avis.html.twig', [ // étape 3
+            
+        ]);
+    }
     #[Route('/apropos', name: 'apropos')] // étape 1
     public function apropos(): Response // étape 2
     {
