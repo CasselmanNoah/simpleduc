@@ -6,16 +6,43 @@
 {% for flash_error in app.flashes('verify_email_error') %}
 <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
 {% endfor %}
+<center>
+    <h1>Inscription</h1>
 
-<h1>Inscription</h1>
+    {{ form_start(registrationForm) }}
+    {{ form_row(registrationForm.nom) }}
+    {{ form_row(registrationForm.prenom) }}
 
-{{ form_start(registrationForm) }}
-{{ form_row(registrationForm.email) }}
-{{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
-        }) }}
-{{ form_row(registrationForm.agreeTerms) }}
+    {{ form_row(registrationForm.email) }}
+    {{ form_row(registrationForm.plainPassword, {
+    label: 'Mot de passe'
+}) }}
+    {{ form_row(registrationForm.adresse) }}
+    {{ form_row(registrationForm.permis) }}
 
-<button type="submit" class="btn">S'inscrire</button>
-{{ form_end(registrationForm) }}
+    {{ form_row(registrationForm.agreeTerms) }}
+
+    <button type="submit" class="button">S'inscrire</button>
+    {{ form_end(registrationForm) }}
+</center>
+
+<style>
+    button {
+        display: inline-block;
+        background-color: #2e4e8a;
+        border-radius: 10px;
+        border: 4px double #ffffff;
+        color: #eeeeee;
+        text-align: center;
+        font-size: 15px;
+        padding: 15px;
+        width: 150px;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+</style>
 {% endblock %}

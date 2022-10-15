@@ -52,7 +52,13 @@ class BaseController extends AbstractController
         ]);
     }
   
-   
+    #[Route('/postuler', name: 'postuler')] // étape 1
+    public function postuler(): Response // étape 2
+    {
+        return $this->render('poste/postuler.html.twig', [ // étape 3
+            
+        ]);
+    }
    
     #[Route('/apropos', name: 'apropos')] // étape 1
     public function apropos(): Response // étape 2

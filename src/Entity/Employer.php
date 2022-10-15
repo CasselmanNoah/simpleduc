@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmployerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -31,6 +33,29 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\Column(length: 50)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 25)]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $adresse = null;
+
+    #[ORM\Column]
+    private ?bool $permis = null;
+
+    #[ORM\OneToMany(mappedBy: 'idEmp', targetEntity: FicheDePaie::class)]
+    private Collection $ficheDePaies;
+
+    #[ORM\ManyToOne(inversedBy: 'employers')]
+    private ?Roles $idRoles = null;
+
+    public function __construct()
+    {
+        $this->ficheDePaies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -129,6 +154,96 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function isPermis(): ?bool
+    {
+        return $this->permis;
+    }
+
+    public function setPermis(bool $permis): self
+    {
+        $this->permis = $permis;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FicheDePaie>
+     */
+    public function getFicheDePaies(): Collection
+    {
+        return $this->ficheDePaies;
+    }
+
+    public function addFicheDePaie(FicheDePaie $ficheDePaie): self
+    {
+        if (!$this->ficheDePaies->contains($ficheDePaie)) {
+            $this->ficheDePaies->add($ficheDePaie);
+            $ficheDePaie->setIdEmp($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFicheDePaie(FicheDePaie $ficheDePaie): self
+    {
+        if ($this->ficheDePaies->removeElement($ficheDePaie)) {
+            // set the owning side to null (unless already changed)
+            if ($ficheDePaie->getIdEmp() === $this) {
+                $ficheDePaie->setIdEmp(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getIdRoles(): ?Roles
+    {
+        return $this->idRoles;
+    }
+
+    public function setIdRoles(?Roles $idRoles): self
+    {
+        $this->idRoles = $idRoles;
 
         return $this;
     }

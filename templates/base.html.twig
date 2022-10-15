@@ -32,10 +32,7 @@
                     </li>
 
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{path('apropos')}}">A propos
-                        </a>
-                    </li>
+
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{path('app_login')}}">Se connecter
@@ -60,7 +57,14 @@
 
                     {% endif %}
 
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('postuler')}}">Postuler
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('apropos')}}">A propos
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
