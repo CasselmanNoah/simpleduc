@@ -51,7 +51,7 @@ class BaseController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-  
+    
     #[Route('/postuler', name: 'postuler')] // étape 1
     public function postuler(): Response // étape 2
     {

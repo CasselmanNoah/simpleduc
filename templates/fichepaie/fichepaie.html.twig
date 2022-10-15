@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}}Liste des inscrits{% endblock %}
+{% block title %}{{parent()}}Fiche de paie{% endblock %}
 
 {% block body %}
-<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold"> Liste des inscrits</h1>
+<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">Fiche de paie</h1>
 <div class="container-fluid">
 
     <div class="row justify-content-center">
@@ -13,19 +13,21 @@
                     <thead>
                         <tr class="fw-bold text-primary">
                             <th scope="col">Nom</th>
-                            <th scope="col">Prénom</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Adresse</th>
+                            <th scope="col">Salaire brut</th>
+                            <th scope="col">Salaire net</th>
+                            <th scope="col">Matricule</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for inscrit in inscription %}
+                        {% for fiche in fichepaie %}
+                        {% for employer in inscrits %}
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
-                            <td>{{ inscrit.nom | capitalize }}</td>
-                            <td>{{ inscrit.prenom | capitalize }}</td>
-                            <td>{{ inscrit.email | lower }}</td>
-                            <td>{{ inscrit.adresse | lower }}</td>
+                            <td>{{ employer.nom | capitalize }}</td>
+                            <td>{{ fiche.salairebrut | capitalize }}</td>
+                            <td>{{ fiche.salairenet | lower }}</td>
+                            <td>{{ fiche.matricule | lower }}</td>
                         </tr>
+                        {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
