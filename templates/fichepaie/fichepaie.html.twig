@@ -12,7 +12,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr class="fw-bold text-primary">
-                            <th scope="col">Nom</th>
+
                             <th scope="col">Salaire brut</th>
                             <th scope="col">Salaire net</th>
                             <th scope="col">Matricule</th>
@@ -20,14 +20,14 @@
                     </thead>
                     <tbody>
                         {% for fiche in fichepaie %}
-                        {% for employer in inscrits %}
+
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
-                            <td>{{ employer.nom | capitalize }}</td>
+
                             <td>{{ fiche.salairebrut | capitalize }}</td>
                             <td>{{ fiche.salairenet | lower }}</td>
                             <td>{{ fiche.matricule | lower }}</td>
                         </tr>
-                        {% endfor %}
+
                         {% endfor %}
                     </tbody>
                 </table>
