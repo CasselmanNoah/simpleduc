@@ -56,6 +56,23 @@ class EmployerRepository extends ServiceEntityRepository implements PasswordUpgr
         $this->save($user, true);
     }
 
+   
+
+  /*  public function essaieEmployer(int $price): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT DISTINCT nom FROM Employer
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+*/
+
 //    /**
 //     * @return Employer[] Returns an array of Employer objects
 //     */
