@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\InscriptionType;
 use App\Entity\Inscription;
+use App\Form\PostulantType;
+use App\Entity\Postulant;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -52,11 +54,34 @@ class BaseController extends AbstractController
         ]);
     }
     
-    #[Route('/postuler', name: 'postuler')] // étape 1
-    public function postuler(): Response // étape 2
+    #[Route('/postuler', name: 'postuler')]
+    public function postuler(Request $request, MailerInterface $mailer): Response
     {
-        return $this->render('poste/postuler.html.twig', [ // étape 3
-            
+        $postuler = new Postulant();
+        $form = $this->createForm(PostulantType::class, $postuler);
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if ($form->isSubmitted()&&$form->isValid()){
+                $nemail = (new TemplatedEmail())
+                ->from($postuler->getEmail())
+                ->to('noah.casselman@gmail.com')
+                ->htmlTemplate('emails/postuler.html.twig')
+                ->context([
+                    'nom'=> $postuler->getNom(),
+                    'prenom'=> $postuler->getPrenom(),
+                ]);
+                $postuler->setDateEnvoi(new \Datetime());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($postuler);
+                $em->flush();
+
+                
+                $this->addFlash('notice','Votre demande a été enregistrer !');
+                return $this->redirectToRoute('postuler');
+            }
+        }
+        return $this->render('poste/postuler.html.twig', [
+            'form' => $form->createView()
         ]);
     }
     #[Route('/avis', name: 'avis')] // étape 1

@@ -12,7 +12,6 @@
                 <table class="table table-hover">
                     <thead>
                         <tr class="fw-bold text-primary">
-                            <th scope="col">Nom</th>
                             <th scope="col">Id</th>
                             <th scope="col">Salaire brut</th>
                             <th scope="col">Salaire net</th>
@@ -20,11 +19,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for inscrit in inscrits %}
-                        <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
-                            <td>{{ inscrit.nom | capitalize }}</td>
-                        </tr>
-                        {% endfor %}
                         {% for fiche in fichepaie %}
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
                             <td>{{ fiche.id | capitalize }}</td>
@@ -32,7 +26,6 @@
                             <td>{{ fiche.salairenet | lower }}</td>
                             <td>{{ fiche.matricule | lower }}</td>
                         </tr>
-
                         {% endfor %}
                     </tbody>
                 </table>
