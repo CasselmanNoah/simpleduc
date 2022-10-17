@@ -15,15 +15,19 @@ class Roles
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50,unique:true)]
     private ?string $profession = null;
 
     #[ORM\OneToMany(mappedBy: 'idRoles', targetEntity: Employer::class)]
     private Collection $employers;
 
+    #[ORM\OneToMany(mappedBy: 'Poste', targetEntity: Postulant::class)]
+    private Collection $postulants;
+
     public function __construct()
     {
         $this->employers = new ArrayCollection();
+        $this->postulants = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +71,36 @@ class Roles
             // set the owning side to null (unless already changed)
             if ($employer->getIdRoles() === $this) {
                 $employer->setIdRoles(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Postulant>
+     */
+    public function getPostulants(): Collection
+    {
+        return $this->postulants;
+    }
+
+    public function addPostulant(Postulant $postulant): self
+    {
+        if (!$this->postulants->contains($postulant)) {
+            $this->postulants->add($postulant);
+            $postulant->setPoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostulant(Postulant $postulant): self
+    {
+        if ($this->postulants->removeElement($postulant)) {
+            // set the owning side to null (unless already changed)
+            if ($postulant->getPoste() === $this) {
+                $postulant->setPoste(null);
             }
         }
 

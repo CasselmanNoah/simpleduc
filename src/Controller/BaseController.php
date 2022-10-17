@@ -84,6 +84,13 @@ class BaseController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    #[Route('/profil', name: 'profil')] // étape 1
+    public function profil(): Response // étape 2
+    {
+        return $this->render('profil/profil.html.twig', [ // étape 3
+            
+        ]);
+    }
     #[Route('/avis', name: 'avis')] // étape 1
     public function avis(): Response // étape 2
     {

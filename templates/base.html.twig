@@ -46,6 +46,7 @@
                         <a class="nav-link" href="{{path('postuler')}}">Postuler
                         </a>
                     </li>
+
                     {% else %}
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MOD')%}
                     <li class="nav-item">
@@ -62,7 +63,10 @@
                             <i class="bi bi-x-circle-fill text-white"></i>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('profil')}}">Profil
+                        </a>
+                    </li>
                     {% endif %}
 
 

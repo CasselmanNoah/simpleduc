@@ -26,6 +26,9 @@ class Postulant
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateEnvoi = null;
 
+    #[ORM\ManyToOne(inversedBy: 'postulants')]
+    private ?Roles $Poste = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Postulant
     public function setDateEnvoi(\DateTimeInterface $dateEnvoi): self
     {
         $this->dateEnvoi = $dateEnvoi;
+
+        return $this;
+    }
+
+    public function getPoste(): ?Roles
+    {
+        return $this->Poste;
+    }
+
+    public function setPoste(?Roles $Poste): self
+    {
+        $this->Poste = $Poste;
 
         return $this;
     }
