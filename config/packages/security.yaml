@@ -33,11 +33,11 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/private, roles: ROLE_MOD }
     role_hierarchy:
-        ROLE_MOD: [ROLE_USER]
-        ROLE_ADMIN: [ROLE_MOD]
+        ROLE_DEV: [ROLE_USER]
+        ROLE_RESPONSABLE: [ROLE_MOD]
         ROLE_GERANT: [ROLE_MOD]
 when@test:
     security:

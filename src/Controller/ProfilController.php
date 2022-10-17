@@ -10,7 +10,7 @@ use App\Entity\Roles;
 
 class ProfilController extends AbstractController
 {
-    #[Route('/private-profil', name: 'profil')]
+    #[Route('/profil', name: 'profil')]
     public function profil(): Response
     {
         $repoRoles = $this->getDoctrine()->getRepository(Roles::class);

@@ -12,21 +12,20 @@
                 <table class="table table-hover">
                     <thead>
                         <tr class="fw-bold text-primary">
-                            <th scope="col">Nom</th>
+                            <th scope="col">Id</th>
                             <th scope="col">Salaire brut</th>
                             <th scope="col">Salaire net</th>
                             <th scope="col">Matricule</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for fiche in fichepaie %}
+                        {% for fiche in ficheclient %}
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
-                            <td>{{ app.user.nom }}</td>
+                            <td>{{ fiche.id | capitalize }}</td>
                             <td>{{ fiche.salairebrut | capitalize }}</td>
                             <td>{{ fiche.salairenet | lower }}</td>
                             <td>{{ fiche.matricule | lower }}</td>
                         </tr>
-                        {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
@@ -34,5 +33,13 @@
         </div>
     </div>
 </div>
-
+{% if  app.user.roles[0] == "ROLE_GERANT" %}
+<p class="title">Rôle : Gérant</p>
+{% endif %}
+{% if  app.user.roles[0] == "ROLE_DEV" %}
+<p class="title">Rôle : Developeur</p>
+{% endif %}
+{% if  app.user.roles[0] == "ROLE_RESPONSABLE" %}
+<p class="title">Rôle : Responsable</p>
+{% endif %}
 {% endblock %}

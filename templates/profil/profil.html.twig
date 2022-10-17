@@ -13,11 +13,16 @@
     {% if  app.user.roles[0] == "ROLE_GERANT" %}
     <p class="title">Rôle : Gérant</p>
     {% endif %}
+    {% if  app.user.roles[0] == "ROLE_DEV" %}
+    <p class="title">Rôle : Developeur</p>
+    {% endif %}
+    {% if  app.user.roles[0] == "ROLE_RESPONSABLE" %}
+    <p class="title">Rôle : Responsable</p>
+    {% endif %}
 
-
-
-    <p><button>Contact</button></p>
-
+    <a href="{{path('ficheclient')}}">
+        <button>Mes Fiches de paies</button>
+    </a>
 </div>
 <style>
     .card {
@@ -45,15 +50,14 @@
         font-size: 18px;
     }
 
+    button {
+        transition-duration: 0.4s;
+    }
+
     a {
         text-decoration: none;
         font-size: 22px;
         color: black;
-    }
-
-    button:hover,
-    a:hover {
-        opacity: 0.7;
     }
 </style>
 
