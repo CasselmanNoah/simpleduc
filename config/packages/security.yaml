@@ -37,8 +37,8 @@ security:
         - { path: ^/private, roles: ROLE_MOD }
     role_hierarchy:
         ROLE_MOD: [ROLE_USER]
-        ROLE_ADMIN: [ ROLE_MOD]           
-
+        ROLE_ADMIN: [ROLE_MOD]
+        ROLE_GERANT: [ROLE_MOD]
 when@test:
     security:
         password_hashers:

@@ -34,7 +34,6 @@ class Roles
     {
         return $this->id;
     }
-
     public function getProfession(): ?string
     {
         return $this->profession;
