@@ -52,9 +52,13 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'employers')]
     private ?Roles $idRoles = null;
 
+    #[ORM\OneToMany(mappedBy: 'idEmployer', targetEntity: Projet::class)]
+    private Collection $projets;
+
     public function __construct()
     {
         $this->ficheDePaies = new ArrayCollection();
+        $this->projets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -244,6 +248,36 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIdRoles(?Roles $idRoles): self
     {
         $this->idRoles = $idRoles;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Projet>
+     */
+    public function getProjets(): Collection
+    {
+        return $this->projets;
+    }
+
+    public function addProjet(Projet $projet): self
+    {
+        if (!$this->projets->contains($projet)) {
+            $this->projets->add($projet);
+            $projet->setIdEmployer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjet(Projet $projet): self
+    {
+        if ($this->projets->removeElement($projet)) {
+            // set the owning side to null (unless already changed)
+            if ($projet->getIdEmployer() === $this) {
+                $projet->setIdEmployer(null);
+            }
+        }
 
         return $this;
     }

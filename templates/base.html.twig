@@ -22,7 +22,6 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -30,9 +29,6 @@
                         </a>
                     </li>
                     </li>
-
-
-
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{path('app_login')}}">Se connecter
@@ -46,7 +42,6 @@
                         <a class="nav-link" href="{{path('postuler')}}">Postuler
                         </a>
                     </li>
-
                     {% else %}
                     {% if is_granted('ROLE_GERANT') or is_granted('ROLE_RESPONSABLE')%}
                     <li class="nav-item">
@@ -80,7 +75,9 @@
                     </li>
                 </ul>
             </div>
+
         </div>
+
     </nav>
     {% for message in app.flashes('notice') %}
     <h2 class="alert alert-warning text-center mt-4 mb-4" role="alert">

@@ -33,13 +33,5 @@
         </div>
     </div>
 </div>
-{% if  app.user.roles[0] == "ROLE_GERANT" %}
-<p class="title">Rôle : Gérant</p>
-{% endif %}
-{% if  app.user.roles[0] == "ROLE_DEV" %}
-<p class="title">Rôle : Developeur</p>
-{% endif %}
-{% if  app.user.roles[0] == "ROLE_RESPONSABLE" %}
-<p class="title">Rôle : Responsable</p>
-{% endif %}
+
 {% endblock %}
