@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{parent()}}Modifier profil{% endblock %}
+
+{% block body %}
+<h1 class="text-center text-primary mt-4 pt-4 display-1 fw-bold">Modifier mon profil</h1>
+
+<div class="modif">
+    <center>
+        <h1>{{ app.user.prenom }} {{ app.user.nom }}</h1>
+
+        <p class="title">Email :{{ app.user.email }}</p>
+        {% if  app.user.roles[0] == "ROLE_GERANT" %}
+        <p class="title">Rôle : Gérant</p>
+        {% endif %}
+        {% if  app.user.roles[0] == "ROLE_DEV" %}
+        <p class="title">Rôle : Developeur</p>
+        {% endif %}
+        {% if  app.user.roles[0] == "ROLE_RESPONSABLE" %}
+        <p class="title">Rôle : Responsable</p>
+        {% endif %}
+
+    </center>
+
+</div>
+
+
+<style>
+    .modif {
+        border: 2px solid black;
+        padding: 1.5rem;
+        margin: 1.5rem;
+
+    }
+</style>
+
+{% endblock %}

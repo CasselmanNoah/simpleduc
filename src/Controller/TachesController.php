@@ -24,6 +24,7 @@ class TachesController extends AbstractController
             if ($form->isSubmitted()&&$form->isValid()){
                 $email = (new TemplatedEmail())
                 ->context([
+                    'projet'=> $tache->getIdprojet(),
                     'tache'=> $tache->getLibelle(),         
                 ]);
                 $em = $this->getDoctrine()->getManager();

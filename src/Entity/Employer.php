@@ -297,6 +297,12 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    
+   /*
+    public function connexionBdd(): Response
+    {
+        $base = mysql_connect ('localhost', 'login4448', 'offUjoLoLeuxhqu');
+        mysql_select_db ('basesimpleeduc', $base) ;
+        return $base;
+    }
+    */
 }
