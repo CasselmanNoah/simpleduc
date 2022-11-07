@@ -55,6 +55,10 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'idEmployer', targetEntity: Projet::class)]
     private Collection $projets;
 
+    #[ORM\ManyToOne(inversedBy: 'lesprojets')]
+    private ?Projet $idprojet = null;
+
+
     public function __construct()
     {
         $this->ficheDePaies = new ArrayCollection();
@@ -281,4 +285,18 @@ class Employer implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getIdprojet(): ?Projet
+    {
+        return $this->idprojet;
+    }
+
+    public function setIdprojet(?Projet $idprojet): self
+    {
+        $this->idprojet = $idprojet;
+
+        return $this;
+    }
+
+    
 }

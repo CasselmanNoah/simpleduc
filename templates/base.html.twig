@@ -42,6 +42,7 @@
                         <a class="nav-link" href="{{path('postuler')}}">Postuler
                         </a>
                     </li>
+
                     {% else %}
                     {% if is_granted('ROLE_GERANT') or is_granted('ROLE_RESPONSABLE')%}
                     <li class="nav-item">
@@ -62,6 +63,15 @@
                         <a class="nav-link" href="{{path('profil')}}">Profil
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('projet')}}">Projets
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('tache')}}">Taches
+                        </a>
+                    </li>
+
                     {% endif %}
 
 

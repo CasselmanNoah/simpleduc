@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjetRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
@@ -16,8 +18,18 @@ class Projet
     #[ORM\Column(length: 30)]
     private ?string $nom = null;
 
-    #[ORM\ManyToOne(inversedBy: 'projets')]
-    private ?Employer $idEmployer = null;
+    #[ORM\OneToMany(mappedBy: 'idprojet', targetEntity: Employer::class)]
+    private Collection $employers;
+
+    #[ORM\OneToMany(mappedBy: 'idprojet', targetEntity: Taches::class)]
+    private Collection $taches;
+
+    public function __construct()
+    {
+        $this->employers = new ArrayCollection();
+        $this->taches = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -36,14 +48,62 @@ class Projet
         return $this;
     }
 
-    public function getIdEmployer(): ?Employer
+    /**
+     * @return Collection<int, Employer>
+     */
+    public function getEmployers(): Collection
     {
-        return $this->idEmployer;
+        return $this->employers;
     }
 
-    public function setIdEmployer(?Employer $idEmployer): self
+    public function addEmployer(Employer $employer): self
     {
-        $this->idEmployer = $idEmployer;
+        if (!$this->employers->contains($employer)) {
+            $this->employers->add($employer);
+            $employer->setIdprojet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEmployer(Employer $employer): self
+    {
+        if ($this->employers->removeElement($employer)) {
+            // set the owning side to null (unless already changed)
+            if ($employer->getIdprojet() === $this) {
+                $employer->setIdprojet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Taches>
+     */
+    public function getTaches(): Collection
+    {
+        return $this->taches;
+    }
+
+    public function addTach(Taches $tach): self
+    {
+        if (!$this->taches->contains($tach)) {
+            $this->taches->add($tach);
+            $tach->setIdprojet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTach(Taches $tach): self
+    {
+        if ($this->taches->removeElement($tach)) {
+            // set the owning side to null (unless already changed)
+            if ($tach->getIdprojet() === $this) {
+                $tach->setIdprojet(null);
+            }
+        }
 
         return $this;
     }

@@ -6,39 +6,40 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Projet;
-use App\Form\ProjetType;
+use App\Entity\Taches;
+use App\Form\TachesType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
-class ProjetController extends AbstractController
+class TachesController extends AbstractController
 {
-    #[Route('/projet', name: 'projet')]
-    public function projet(Request $request): Response
+    #[Route('/tache', name: 'tache')]
+    public function tache(Request $request): Response
     {
-        $projet = new Projet();
-        $form = $this->createForm(ProjetType::class, $projet);
+    $tache = new Taches();
+        $form = $this->createForm(TachesType::class, $tache);
         if($request->isMethod('POST')){
             $form->handleRequest($request);    
             if ($form->isSubmitted()&&$form->isValid()){
                 $email = (new TemplatedEmail())
                 ->context([
-                    'nom'=> $projet->getNom(),         
+                    'tache'=> $tache->getLibelle(),         
                 ]);
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($projet);
+                $em->persist($tache);
                 $em->flush();
-                $this->addFlash('notice','Projet ajouté');
-                return $this->redirectToRoute('projet');
+                $this->addFlash('notice','Tache ajouté');
+                return $this->redirectToRoute('tache');
             }
         }
-        $repoProjet = $this->getDoctrine()->getRepository(Projet::class);
-        $projets = $repoProjet->findAll();
+        $repoTache = $this->getDoctrine()->getRepository(Taches::class);
+        $taches = $repoTache->findAll();
       
-        return $this->render('projet/projet.html.twig', [
+        return $this->render('taches/tache.html.twig', [
             'form' => $form->createView(),
-            'projets' => $projets
+            'taches' => $taches
         ]);
     }
 }
+
