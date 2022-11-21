@@ -33,7 +33,7 @@
                         {% for fiche in ficheclient %}
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
                             {% if  app.user.roles[0] == "ROLE_GERANT" %}
-                            <td>{{ personnes.id | capitalize }}</td>
+                            <td>{{ personnes.nom | capitalize }}</td>
                             {% endif %}
 
                             <td>{{ fiche.salairebrut | capitalize }}</td>
