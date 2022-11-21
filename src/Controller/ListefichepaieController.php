@@ -13,7 +13,7 @@ class ListefichepaieController extends AbstractController
     #[Route('/private-listefichepaie', name: 'listefichepaie')]
     public function index(): Response
     {
-        $repoPersonne = $this->getDoctrine()->getRepository(FicheDePaie::class);
+        $repoPersonne = $this->getDoctrine()->getRepository(Employer::class);
         $personnes = $repoPersonne->findAll();
         $repoFichepaie = $this->getDoctrine()->getRepository(FicheDePaie::class);
         $fichepaie = $repoFichepaie->findAll();
