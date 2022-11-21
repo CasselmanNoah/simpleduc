@@ -19,12 +19,35 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <p class="title">Email :{{ app.user.email }}</p>
+                        {% if  app.user.roles[0] == "ROLE_GERANT" %}
+                        <p class="title">Rôle : Gérant</p>
+                        {% endif %}
+                        {% if  app.user.roles[0] == "ROLE_DEV" %}
+                        <p class="title">Rôle : Developeur</p>
+                        {% endif %}
+                        {% if  app.user.roles[0] == "ROLE_RESPONSABLE" %}
+                        <p class="title">Rôle : Responsable</p>
+                        {% endif %}
                         {% for fiche in ficheclient %}
                         <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
-                            <td>{{ fiche.id | capitalize }}</td>
+                            {% if  app.user.roles[0] == "ROLE_GERANT" %}
+                            <td>{{ personnes.id | capitalize }}</td>
+                            {% endif %}
+
                             <td>{{ fiche.salairebrut | capitalize }}</td>
                             <td>{{ fiche.salairenet | lower }}</td>
                             <td>{{ fiche.matricule | lower }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% for pers in personnes %}
+                        <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
+                            {% if  app.user.roles[0] == "ROLE_GERANT" %}
+                            <td>{{ pers.id | capitalize }}</td>
+                            {% endif %}
+
+
                         </tr>
                         {% endfor %}
                     </tbody>

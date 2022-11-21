@@ -25,10 +25,13 @@ class ListefichepaieController extends AbstractController
     #[Route('/ficheclient', name: 'ficheclient')]
     public function fichePaieClient(): Response
     {
-        $repoFiche = $this->getDoctrine()->getRepository(FicheDePaie::class);
-        $ficheclient = $repoFiche->findAll();
-        return $this->render('fichepaie/ficheclient.html.twig', [
-            'ficheclient' => $ficheclient
+        $repoPersonne = $this->getDoctrine()->getRepository(Employer::class);
+        $personnes = $repoPersonne->findAll();
+        $repoFichepaie = $this->getDoctrine()->getRepository(FicheDePaie::class);
+        $fichepaie = $repoFichepaie->findAll();
+        return $this->render('fichepaie/fichepaie.html.twig', [
+            'fichepaie' => $fichepaie,
+            'personnes' => $personnes
         ]);
     }
 }
