@@ -36,23 +36,14 @@
                             {% if  app.user.roles[0] == "ROLE_GERANT" %}
 
                             <td>{{ fiche.id| capitalize }}</td>
-                            {% endif %}
 
                             <td>{{ fiche.salairebrut | capitalize }}</td>
                             <td>{{ fiche.salairenet | lower }}</td>
                             <td>{{ fiche.matricule | lower }}</td>
                         </tr>
-
+                        {% endif %}
                         {% endfor %}
-                        {% for pers in personnes %}
-                        <tr class="{{ cycle(['table-primary', 'table-secondary'], loop.index0) }}">
-                            {% if  app.user.roles[0] == "ROLE_GERANT" %}
-                            <td>{{ pers.nom | capitalize }}</td>
-                            {% endif %}
 
-
-                        </tr>
-                        {% endfor %}
                     </tbody>
                 </table>
             </div>
