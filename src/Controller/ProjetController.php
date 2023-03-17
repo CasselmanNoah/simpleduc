@@ -34,10 +34,31 @@ class ProjetController extends AbstractController
             }
         }
         $repoProjet = $this->getDoctrine()->getRepository(Projet::class);
-        $projets = $repoProjet->findAll();
+        $projet = $repoProjet->findAll();
       
         return $this->render('projet/projet.html.twig', [
             'form' => $form->createView(),
+            'projet' => $projet
+        ]);
+    }
+    #[Route('/lesprojets', name: 'lesprojets')] // étape 1
+    public function lesprojets(Request $request): Response // étape 2
+    {
+        $projest = new Projet();
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);    
+            if ($form->isSubmitted()&&$form->isValid()){
+                $email = (new TemplatedEmail());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($projet);
+                $em->flush();
+               
+                return $this->redirectToRoute('lesprojet');
+            }
+        }
+        $repoProjet = $this->getDoctrine()->getRepository(Projet::class);
+        $projets = $repoProjet->findAll();
+        return $this->render('projet/lesprojets.html.twig', [ // étape 3
             'projets' => $projets
         ]);
     }

@@ -43,7 +43,11 @@
                         </tr>
                         {% endif %}
                         {% endfor %}
-
+                        <br />
+                        {% for exemple in test %}
+                        <td>{{ exemple.libelle | lower }}</td>
+                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\FicheDePaie;
 use App\Entity\Employer;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ListefichepaieController extends AbstractController
 {
@@ -23,15 +24,21 @@ class ListefichepaieController extends AbstractController
         ]);
     }
     #[Route('/ficheclient', name: 'ficheclient')]
-    public function fichePaieClient(): Response
+    public function fichePaieClient(EntityManagerInterface $entityManagerInterface): Response
     {
+        /*
         $repoPersonne = $this->getDoctrine()->getRepository(Employer::class);
         $personnes = $repoPersonne->findAll();
         $repoFichepaie = $this->getDoctrine()->getRepository(FicheDePaie::class);
         $fichepaie = $repoFichepaie->findAll();
+        */
+        $personnes = $entityManagerInterface->getRepository(Employer::class)->findAll();
+        $fichepaie = $entityManagerInterface->getRepository(FicheDePaie::class)->findAll();
+        $test = $entityManagerInterface->getRepository(Employer::class)->findOneBy(['nom'=>'Ruiz']);
         return $this->render('fichepaie/fichepaie.html.twig', [
             'fichepaie' => $fichepaie,
-            'personnes' => $personnes
+            'personnes' => $personnes,
+            'test' => $test
         ]);
     }
 }
